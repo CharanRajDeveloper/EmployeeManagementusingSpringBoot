@@ -7,8 +7,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 
@@ -35,5 +37,6 @@ public class Employee {
 	private String lastName;
 	@Column(name = "email_id",nullable = false,unique = true)
 	private String email;
-
+	
+	
 }

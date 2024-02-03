@@ -1,5 +1,8 @@
 package com.ems.EmployeeManagement.service.Impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import com.ems.EmployeeManagement.dto.EmployeeDto;
@@ -25,10 +28,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public EmployeeDto getEmployeeId(Long empId) {
-	Employee employee=employeeRepository
-			          .findById(empId)
-			          .orElseThrow(() -> new ResourceNotFoundException("Employee is not exist with the given Employee ID"+empId));
+		Employee employee = employeeRepository.findById(empId).orElseThrow(
+				() -> new ResourceNotFoundException("Employee is not exist with the given Employee ID" + empId));
 		return EmployeeMapper.mapToEmployeeDto(employee);
+	}
+
+	@Override
+	public List<EmployeeDto> getAllEmployees() {
+		List<Employee> empolyee = employeeRepository.findAll();
+		return empolyee.stream().map((employee) -> EmployeeMapper.mapToEmployeeDto(employee))
+				.collect(Collectors.toList());
 	}
 
 }
